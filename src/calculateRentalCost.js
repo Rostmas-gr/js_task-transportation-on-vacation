@@ -4,31 +4,23 @@
  * @return {number}
  */
 
-function calculateRentalCost(days) {
-  const LONG_TERM_DAYS = 7;
-  const LONG_TERM_COST = 230;
+const DAILY_RATE = 40;
+const THREE_DAY_THRESHOLD = 3;
+const THREE_DAY_DISCOUNT = 20;
+const SEVEN_DAY_THRESHOLD = 7;
+const SEVEN_DAY_DISCOUNT = 50;
 
-  if (days === LONG_TERM_DAYS) {
-    return LONG_TERM_COST;
+function calculateRentalCost(rentalDays) {
+  const baseCost = rentalDays * DAILY_RATE;
+
+  if (rentalDays >= SEVEN_DAY_THRESHOLD) {
+    return baseCost - SEVEN_DAY_DISCOUNT;
   }
 
-  const EXTENDED_DISCOUNT_DAYS = 6;
-  const EXTENDED_DISCOUNT_COST = 220;
-
-  if (days === EXTENDED_DISCOUNT_DAYS) {
-    return EXTENDED_DISCOUNT_COST;
+  if (rentalDays >= THREE_DAY_THRESHOLD) {
+    return baseCost - THREE_DAY_DISCOUNT;
   }
 
-  const BASIC_DISCOUNT_DAYS = 3;
-  const BASIC_DISCOUNT_COST = 100;
-
-  if (days === BASIC_DISCOUNT_DAYS) {
-    return BASIC_DISCOUNT_COST;
-  }
-
-  const BASE_COST = 80;
-
-  return BASE_COST;
+  return baseCost;
 }
-
 module.exports = calculateRentalCost;
